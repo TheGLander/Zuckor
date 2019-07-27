@@ -27,7 +27,7 @@
                     context.fillRect(0, 0, canvas.width, canvas.height);
                 }
                 for (var i in sprites) {
-                    if(!(Object.keys(spriteImg).includes(sprites[i].image))){
+                    if (!(Object.keys(spriteImg).includes(sprites[i].image))) {
                         spriteImg[i] = new Image()
                         spriteImg[i].src = sprites[i].image;
                         spriteImg[i]["data-i"] = i
@@ -36,10 +36,10 @@
                             spriteImg[ev.currentTarget["data-image"]] = spriteImg[ev.currentTarget["data-i"]]
                             context.drawImage(spriteImg[ev.currentTarget["data-image"]], sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y)
                         }
-                    }else{
+                    } else {
                         context.drawImage(spriteImg[sprites[i].image], sprites[i].x, sprites[i].y)
                     }
-                    
+
                 }
             })
         }
