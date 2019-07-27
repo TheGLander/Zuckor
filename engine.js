@@ -10,15 +10,15 @@
         _myLibraryObject.Stage = function ({
             height: height = 500,
             width: width = 500,
-            color: color = undefined
+            color: color = undefined,
+            canvas: canvas = document.getElementById("game")
         } = {
             height: 500,
             width: 500,
-            color: undefined
+            color: undefined,
+            canvas: document.getElementById("game")
         }) {
-            clone($("#game").html(`<canvas class="canvas" height=${height} width=${width}><h1>Canvas not supported!</h1></canvas><p>Made by G lander</p>`));
             setInterval(() => {
-                var canvas = document.getElementsByClassName("canvas")[0]
                 var context = canvas.getContext("2d");
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 if (color != undefined) {
