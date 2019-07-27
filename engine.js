@@ -60,8 +60,10 @@
             this.image = image
             this.physics = {}
             this.delete = function () {
-                sprites.splice(this.id)
-            }
+                var pairs = Object.keys(this)
+                for (var x in pairs) {
+                    delete this[pairs[x]]
+                }
             this.togglePhysics = function ({
                 speed,
                 velocity
