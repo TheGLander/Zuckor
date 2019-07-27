@@ -7,17 +7,21 @@
         var _myLibraryObject = {};
         var sprites = {}
         var spriteImg = {};
+        var frameRate = 0;
         _myLibraryObject.Stage = function ({
             height: height = 500,
             width: width = 500,
             color: color = undefined,
-            canvas: canvas = document.getElementById("game")
+            canvas: canvas = document.getElementById("game"),
+            framerate: framerate = 1000
         } = {
             height: 500,
             width: 500,
             color: undefined,
-            canvas: document.getElementById("game")
+            canvas: document.getElementById("game"),
+            framerate: 1000
         }) {
+            frameRate = framerate
             canvas.height = height
             canvas.width = width
             setInterval(() => {
@@ -42,7 +46,7 @@
                     }
 
                 }
-            })
+            },1000/frameRate)
         }
         _myLibraryObject.Sprite = function ([x, y, degree] = [0, 0, 0], image = "") {
             this.x = x
@@ -107,7 +111,7 @@
                     this.physics.acceleration -= (this.physics.acceleration - this.physics.accelerationLoss / 1000 < 0 ? this.physics.acceleration : this.physics.accelerationLoss / 1000)
                     this.x += this.physics.velocity / 1000 * Math.cos(rad(this.physics.degree));
                     this.y += this.physics.velocity / 1000 * Math.sin(rad(this.physics.degree));
-                }, 1)
+                }, 1000 / frameRate)
             }
             sprites[this.id] = this
         }
