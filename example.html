@@ -12,11 +12,13 @@
 </head>
 
 <body>
-    <canvas id="game"></canvas>
+    <canvas id="game2"></canvas>
     <script>
         new BCGE.Stage({
             height: 500,
-            width: 500
+            width: 500,
+            color: "rgb(0,255,0)",
+            canvas: document.getElementById("game2")
         });
 
         var sprite = new BCGE.Sprite([0, 0, 0], "example-images/test.png")
