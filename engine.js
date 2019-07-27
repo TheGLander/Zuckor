@@ -64,6 +64,8 @@
                 for (var x in pairs) {
                     delete this[pairs[x]]
                 }
+                delete sprites[this.id]
+            }
             this.togglePhysics = function ({
                 speed,
                 velocity
