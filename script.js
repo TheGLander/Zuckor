@@ -3,4 +3,4 @@ new BCGE.Stage({
     width: 500
 });
 
-new BCGE.Sprite([0, 0], "test.png")
+var sprite = new BCGE.Sprite([0, 0, 0], "test.png")

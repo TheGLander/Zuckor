@@ -7,6 +7,7 @@
         var _myLibraryObject = {};
         var nextId = 0;
         var sprites = []
+        var spriteImg = {};
         _myLibraryObject.Stage = function ({
             height: height,
             width: width
@@ -15,18 +16,52 @@
             width: 500
         }) {
             this.stage = clone($("#game").html(`<canvas class="canvas" height=${height} width=${width}><h1>Canvas not supported!</h1></canvas><div style="visibility:hidden"><img class="picRender"></div>`));
+            this.render = setInterval(async() => {
+                var c = document.getElementsByClassName("canvas")[0]
+                var ctx = c.getContext("2d");
+                ctx.clearRect(0, 0, c.width, c.height);
+                for (var i in sprites) {
+                    if(!(Object.keys(spriteImg).includes(sprites[i].image))){
+                        spriteImg[i] = new Image()
+                        spriteImg[i].src = sprites[i].image;
+                        spriteImg[i]["data-i"] = i
+                        spriteImg[i]["data-image"] = sprites[i].image
+                        spriteImg[i].onload = function (ev) {
+                            spriteImg[ev.currentTarget["data-image"]] = spriteImg[ev.currentTarget["data-i"]]
+                            ctx.drawImage(spriteImg[ev.currentTarget["data-image"]], sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y)
+                        }
+                    }else{
+                        ctx.drawImage(spriteImg[sprites[i].image], sprites[i].x, sprites[i].y)
+                    }
+                    
+                }
+            })
         }
-        _myLibraryObject.Sprite = function ([x, y] = [0, 0], image = "") {
+        _myLibraryObject.Sprite = function ([x, y, degree] = [0, 0, 0], image = "") {
             this.x = x
             this.y = y
+            this.degree = degree
             this.id = nextId
+            this.image = image
+            this.physics = {}
             nextId++
-            var image = $(".picRender").attr("src", image)
-            
-            this.image = clone(image);
-            var c = document.getElementsByClassName("canvas")[0]
-            var ctx = c.getContext("2d");
-            ctx.drawImage(image[0], x,y);
+            this.delete = function () {
+                sprites.splice(this.id)
+            }
+            this.togglePhysics = function ({
+                speed,
+                velocity
+            } = {
+                speed: 0,
+                velocity: 0
+            }) {
+                this.physics.speed = speed
+                this.physics.velocity = velocity
+            }
+            sprites[this.id] = this
+        }
+        _myLibraryObject.sprites = function () {
+            return clone(sprites)
         }
         return _myLibraryObject;
     }
