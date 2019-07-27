@@ -13,13 +13,18 @@
             width: width
         } = {
             height: 500,
-            width: 500
+            width: 500,
+            color: undefined
         }) {
             this.stage = clone($("#game").html(`<canvas class="canvas" height=${height} width=${width}><h1>Canvas not supported!</h1></canvas><div style="visibility:hidden"><img class="picRender"></div>`));
             this.render = setInterval(async() => {
                 var canvas = document.getElementsByClassName("canvas")[0]
                 var context = canvas.getContext("2d");
                 context.clearRect(0, 0, canvas.width, canvas.height);
+                if (color != undefined) {
+                    context.fillStyle = color
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                }
                 for (var i in sprites) {
                     if(!(Object.keys(spriteImg).includes(sprites[i].image))){
                         spriteImg[i] = new Image()
