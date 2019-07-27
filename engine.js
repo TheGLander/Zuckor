@@ -5,8 +5,7 @@
     // This function will contain all our code
     function myLibrary() {
         var _myLibraryObject = {};
-        var nextId = 0;
-        var sprites = []
+        var sprites = {}
         var spriteImg = {};
         _myLibraryObject.Stage = function ({
             height: height = 500,
@@ -47,10 +46,19 @@
             this.x = x
             this.y = y
             this.degree = degree
-            this.id = nextId
+            this.id = (function () {
+                if (Object.keys(sprites) == []) {
+                    return 0;
+                }
+                for (var x in Object.keys(sprites)) {
+                    if (x != (sprites[x] === undefined ? undefined : sprites[x].id)) {
+                        return x;
+                    }
+                }
+                return Object.keys(sprites).length
+            })()
             this.image = image
             this.physics = {}
-            nextId++
             this.delete = function () {
                 sprites.splice(this.id)
             }
