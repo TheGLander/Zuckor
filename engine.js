@@ -17,8 +17,8 @@
             width: 500,
             color: undefined
         }) {
-            this.stage = clone($("#game").html(`<canvas class="canvas" height=${height} width=${width}><h1>Canvas not supported!</h1></canvas><div style="visibility:hidden"><img class="picRender"></div>`));
-            this.render = setInterval(async() => {
+            clone($("#game").html(`<canvas class="canvas" height=${height} width=${width}><h1>Canvas not supported!</h1></canvas><p>Made by G lander</p>`));
+            setInterval(() => {
                 var canvas = document.getElementsByClassName("canvas")[0]
                 var context = canvas.getContext("2d");
                 context.clearRect(0, 0, canvas.width, canvas.height);
