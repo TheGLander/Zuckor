@@ -9,8 +9,9 @@
         var sprites = []
         var spriteImg = {};
         _myLibraryObject.Stage = function ({
-            height: height,
-            width: width
+            height: height = 500,
+            width: width = 500,
+            color: color = undefined
         } = {
             height: 500,
             width: 500,
