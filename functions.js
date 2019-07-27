@@ -31,3 +31,6 @@ function clone(obj) {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
+function rad(degrees) {
+    return degrees * (Math.PI / 180);
+}

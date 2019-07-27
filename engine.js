@@ -66,15 +66,46 @@
                 }
                 delete sprites[this.id]
             }
+            //Physics
             this.togglePhysics = function ({
-                speed,
-                velocity
+                velocity = 0,
+                acceleration = 0,
+                velocityLoss = 0,
+                accelerationLoss = 0,
+                degree = 0,
+                gravityVelocity = 0,
+                gravityAcceleration = 0,
+                gravityDegree = 90
             } = {
-                speed: 0,
-                velocity: 0
+                velocity: 0,
+                acceleration: 0,
+                velocityLoss: 0,
+                accelerationLoss: 0,
+                degree: 0,
+                gravityVelocity: 0,
+                gravityAcceleration: 0,
+                gravityDegree: 90
             }) {
-                this.physics.speed = speed
-                this.physics.velocity = velocity
+                this.physics.velocity = velocity // Starting velocity
+                this.physics.acceleration = acceleration // Starting acceleration
+                this.physics.velocityLoss = velocityLoss // Velocity Loss
+                this.physics.accelerationLoss = accelerationLoss // Acceleration Loss
+                this.physics.degree = degree // Degree to move to
+                this.physics.gravityAcceleration = gravityAcceleration // Gravity acceleration
+                this.physics.gravityVelocity = gravityVelocity // Gravity velocity
+                this.physics.gravityDegree = gravityDegree // Degree to move to
+                setInterval(() => {
+                    //Gravity movement calculation(No loss)
+                    this.physics.gravityVelocity += this.physics.gravityAcceleration / 1000
+                    this.x += this.physics.gravityVelocity / 1000 * Math.cos(rad(this.physics.gravityDegree));
+                    this.y += this.physics.gravityVelocity / 1000 * Math.sin(rad(this.physics.gravityDegree));
+                    //Normal movement calculation(With loss)
+                    this.physics.velocity += this.physics.acceleration / 1000
+                    this.physics.velocity -= (this.physics.velocity - this.physics.velocityLoss / 1000 < 0 ? this.physics.velocity : this.physics.velocityLoss / 1000)
+                    this.physics.acceleration -= (this.physics.acceleration - this.physics.accelerationLoss / 1000 < 0 ? this.physics.acceleration : this.physics.accelerationLoss / 1000)
+                    this.x += this.physics.velocity / 1000 * Math.cos(rad(this.physics.degree));
+                    this.y += this.physics.velocity / 1000 * Math.sin(rad(this.physics.degree));
+                }, 1)
             }
             sprites[this.id] = this
         }
