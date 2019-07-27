@@ -17,9 +17,9 @@
         }) {
             this.stage = clone($("#game").html(`<canvas class="canvas" height=${height} width=${width}><h1>Canvas not supported!</h1></canvas><div style="visibility:hidden"><img class="picRender"></div>`));
             this.render = setInterval(async() => {
-                var c = document.getElementsByClassName("canvas")[0]
-                var ctx = c.getContext("2d");
-                ctx.clearRect(0, 0, c.width, c.height);
+                var canvas = document.getElementsByClassName("canvas")[0]
+                var context = canvas.getContext("2d");
+                context.clearRect(0, 0, canvas.width, canvas.height);
                 for (var i in sprites) {
                     if(!(Object.keys(spriteImg).includes(sprites[i].image))){
                         spriteImg[i] = new Image()
@@ -28,10 +28,10 @@
                         spriteImg[i]["data-image"] = sprites[i].image
                         spriteImg[i].onload = function (ev) {
                             spriteImg[ev.currentTarget["data-image"]] = spriteImg[ev.currentTarget["data-i"]]
-                            ctx.drawImage(spriteImg[ev.currentTarget["data-image"]], sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y)
+                            context.drawImage(spriteImg[ev.currentTarget["data-image"]], sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y)
                         }
                     }else{
-                        ctx.drawImage(spriteImg[sprites[i].image], sprites[i].x, sprites[i].y)
+                        context.drawImage(spriteImg[sprites[i].image], sprites[i].x, sprites[i].y)
                     }
                     
                 }
