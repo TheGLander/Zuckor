@@ -13,7 +13,14 @@
 
 <body>
     <canvas id="game"></canvas>
-    <script src="script.js"></script>
+    <script>
+        new BCGE.Stage({
+            height: 500,
+            width: 500
+        });
+
+        var sprite = new BCGE.Sprite([0, 0, 0], "example-images/test.png")
+    </script>
 </body>
 
 </html>
