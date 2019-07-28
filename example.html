@@ -15,41 +15,41 @@
     <canvas id="game2"></canvas>
     <p id="counter">Sprite count: 0</p>
     <p><button onclick="
-        var sprite = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
+        var dummy = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
         var z = 0
         var RID = setInterval(()=>{
-            sprite.x = z
-            sprite.y = z
+            dummy.x = z
+            dummy.y = z
             z++
             if(z == 500){
-                sprite.delete()
+                dummy.delete()
                 clearInterval(RID)
             }
         },1)">Slide diagonally</button></p>
     <p><button onclick="
-        var sprite = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
-        sprite.togglePhysics({velocity:7500,degree:80})
+        var dummy = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
+        dummy.togglePhysics({velocity:7500,degree:80})
         var RID = setInterval(()=>{
-            if(sprite.y >= 480){
-                sprite.physics.degree = 280
+            if(dummy.y >= 480){
+                dummy.physics.degree = 280
             }
-            if(sprite.y <= 0){
-            sprite.physics.degree = 80
+            if(dummy.y <= 0){
+            dummy.physics.degree = 80
             }
-            if(sprite.x >= 500){
-                sprite.delete()
+            if(dummy.x >= 500){
+                dummy.delete()
                 clearInterval(RID)
             }
         },1)">Bounce up and down</button></p>
     <p><button onclick="
-        var sprite = new BCGE.Sprite([150, 150, 0], 'example-images/dummy.png');
+        var dummy = new BCGE.Sprite([150, 150, 0], 'example-images/dummy.png');
         var z = 0
-        sprite.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
+        dummy.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
         var RID = setInterval(()=>{
-            sprite.physics.gravityDegree = z % 365 * 2
+            dummy.physics.gravityDegree = z % 365 * 2
             z++
             if(z == 1250){
-                sprite.delete()
+                dummy.delete()
                 clearInterval(RID)
             }
         },1)">Do a spiral</button></p>
