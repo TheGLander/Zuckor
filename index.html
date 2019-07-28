@@ -63,7 +63,7 @@
                 clearInterval(RID)
             }
         },1)">Do a spiral</button></p>
-    <p><input id="spin" type="checkbox" checked><label for="spin">Spin!</label></p>
+    <p><input id="spin" type="checkbox"><label for="spin">Spin!</label></p>
     <script>
         new BCGE.Stage({
             height: 500,
@@ -78,6 +78,7 @@
         })
         var spin = false
         var checkmark = document.querySelector('input[id="spin"]');
+        document.querySelector('input[id="spin"]').checked = false
         checkmark.addEventListener('click', function (e) {
             spin = !spin
         });
