@@ -13,6 +13,20 @@
 
 <body>
     <canvas id="game2"></canvas>
+    <button onclick="
+        var sprite = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
+        sprite.x = 150
+        sprite.y = 150
+        var z = 0
+        sprite.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
+        var RID = setInterval(()=>{
+            sprite.physics.gravityDegree = z % 365 * 2
+            z++
+            if(z == 1250){
+                sprite.delete()
+                clearInterval(RID)
+            }
+        },1)">Do a spiral using gravityDegree and gravityAcceleration</button>
     <script>
         new BCGE.Stage({
             height: 500,
@@ -21,8 +35,6 @@
             canvas: document.getElementById("game2"),
             framerate: 60
         });
-
-        var sprite = new BCGE.Sprite([0, 0, 0], "example-images/test.png")
     </script>
 </body>
 

@@ -46,7 +46,7 @@
                     }
 
                 }
-            },1000/frameRate)
+            }, 1000 / frameRate)
         }
         _myLibraryObject.Sprite = function ([x, y, degree] = [0, 0, 0], image = "") {
             this.x = x
@@ -66,10 +66,7 @@
             this.image = image
             this.physics = {}
             this.delete = function () {
-                var pairs = Object.keys(this)
-                for (var x in pairs) {
-                    delete this[pairs[x]]
-                }
+                clearInterval(this.physics.calcId);
                 delete sprites[this.id]
             }
             //Physics
@@ -100,7 +97,7 @@
                 this.physics.gravityAcceleration = gravityAcceleration // Gravity acceleration
                 this.physics.gravityVelocity = gravityVelocity // Gravity velocity
                 this.physics.gravityDegree = gravityDegree // Degree to move to
-                setInterval(() => {
+                this.physics.calcId = setInterval(() => {
                     //Gravity movement calculation(No loss)
                     this.physics.gravityVelocity += this.physics.gravityAcceleration / 1000
                     this.x += this.physics.gravityVelocity / 1000 * Math.cos(rad(this.physics.gravityDegree));
