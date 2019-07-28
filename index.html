@@ -19,6 +19,9 @@
         var dummy = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
         var z = 0
         var RID = setInterval(()=>{
+            if(spin){
+                dummy.degree += 2
+            }
             dummy.x = z
             dummy.y = z
             z++
@@ -31,6 +34,9 @@
         var dummy = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
         dummy.togglePhysics({velocity:7500,degree:80})
         var RID = setInterval(()=>{
+            if(spin){
+                dummy.degree += 2
+            }
             if(dummy.y >= 480){
                 dummy.physics.degree = 280
             }
@@ -47,6 +53,9 @@
         var z = 0
         dummy.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
         var RID = setInterval(()=>{
+            if(spin){
+                dummy.degree += 2
+            }
             dummy.physics.gravityDegree = z % 365 * 2
             z++
             if(z == 1250){
@@ -54,6 +63,7 @@
                 clearInterval(RID)
             }
         },1)">Do a spiral</button></p>
+    <p><input id="spin" type="checkbox" checked><label for="spin">Spin!</label></p>
     <script>
         new BCGE.Stage({
             height: 500,
@@ -66,6 +76,11 @@
             document.getElementById("counter").innerText =
                 `Sprite count: ${Object.keys(BCGE.sprites()).length}`
         })
+        var spin = false
+        var checkmark = document.querySelector('input[id="spin"]');
+        checkmark.addEventListener('click', function (e) {
+            spin = !spin
+        });
     </script>
 </body>
 
