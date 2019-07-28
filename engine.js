@@ -38,16 +38,15 @@
                 }
                 for (var i in sprites) {
                     if (!(Object.keys(spriteImg).includes(sprites[i].image))) {
-                        spriteImg[i] = new Image()
-                        spriteImg[i].src = sprites[i].image;
-                        spriteImg[i]["data-i"] = i
-                        spriteImg[i]["data-image"] = sprites[i].image
-                        spriteImg[i].onload = function (ev) {
-                            spriteImg[ev.currentTarget["data-image"]] = spriteImg[ev.currentTarget["data-i"]]
-                            context.drawImage(spriteImg[ev.currentTarget["data-image"]], sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y)
+                        spriteImg[sprites[i].image] = new Image()
+                        spriteImg[sprites[i].image].src = sprites[i].image;
+                        spriteImg[sprites[i].image]["data-i"] = i
+                        spriteImg[sprites[i].image]["data-image"] = sprites[i].image
+                        spriteImg[sprites[i].image].onload = function (ev) {
+                            drawRotatedImage(context, spriteImg[ev.currentTarget["data-image"]], sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y, sprites[ev.currentTarget["data-i"]].y)
                         }
                     } else {
-                        context.drawImage(spriteImg[sprites[i].image], sprites[i].x, sprites[i].y)
+                        drawRotatedImage(context, spriteImg[sprites[i].image], sprites[i].x, sprites[i].y,sprites[i].degree)
                     }
 
                 }
