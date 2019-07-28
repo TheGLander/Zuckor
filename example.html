@@ -27,6 +27,21 @@
             }
         },1)">Slide diagonally</button></p>
     <p><button onclick="
+        var sprite = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
+        sprite.togglePhysics({velocity:7500,degree:80})
+        var RID = setInterval(()=>{
+            if(sprite.y >= 480){
+                sprite.physics.degree = 280
+            }
+            if(sprite.y <= 0){
+            sprite.physics.degree = 80
+            }
+            if(sprite.x >= 500){
+                sprite.delete()
+                clearInterval(RID)
+            }
+        },1)">Bounce up and down</button></p>
+    <p><button onclick="
         var sprite = new BCGE.Sprite([150, 150, 0], 'example-images/dummy.png');
         var z = 0
         sprite.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
@@ -37,7 +52,7 @@
                 sprite.delete()
                 clearInterval(RID)
             }
-        },1)">Do a spiral using gravityDegree and gravityAcceleration</button></p>
+        },1)">Do a spiral</button></p>
     <script>
         new BCGE.Stage({
             height: 500,
