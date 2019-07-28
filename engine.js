@@ -48,7 +48,7 @@
                 }
             }, 1000 / frameRate)
         }
-        _myLibraryObject.Sprite = function ([x, y, degree] = [0, 0, 0], image = "") {
+        _myLibraryObject.Sprite = function ([x = 0, y = 0, degree = 0] = [0, 0, 0], image = "") {
             this.x = x
             this.y = y
             this.degree = degree
@@ -111,6 +111,7 @@
                 }, 1000 / frameRate)
             }
             sprites[this.id] = this
+            this.id = clone(this.id)
         }
         _myLibraryObject.sprites = function () {
             return clone(sprites)
