@@ -25,10 +25,15 @@
             canvas.height = height
             canvas.width = width
             setInterval(() => {
+                this.color = color
+                this.height = height
+                this.width = width
+                canvas.width = this.width
+                canvas.height = this.height
                 var context = canvas.getContext("2d");
                 context.clearRect(0, 0, canvas.width, canvas.height);
-                if (color != undefined) {
-                    context.fillStyle = color
+                if (this.color != undefined) {
+                    context.fillStyle = this.color
                     context.fillRect(0, 0, canvas.width, canvas.height);
                 }
                 for (var i in sprites) {
