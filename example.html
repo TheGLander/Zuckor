@@ -15,6 +15,18 @@
     <canvas id="game2"></canvas>
     <p id="counter">Sprite count: 0</p>
     <p><button onclick="
+        var sprite = new BCGE.Sprite([0, 0, 0], 'example-images/dummy.png');
+        var z = 0
+        var RID = setInterval(()=>{
+            sprite.x = z
+            sprite.y = z
+            z++
+            if(z == 500){
+                sprite.delete()
+                clearInterval(RID)
+            }
+        },1)">Slide diagonally</button></p>
+    <p><button onclick="
         var sprite = new BCGE.Sprite([150, 150, 0], 'example-images/dummy.png');
         var z = 0
         sprite.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
@@ -25,20 +37,20 @@
                 sprite.delete()
                 clearInterval(RID)
             }
-        },1)">Do a spiral using gravityDegree and gravityAcceleration</button>
-        <script>
-            new BCGE.Stage({
-                height: 500,
-                width: 500,
-                color: "rgb(0,255,0)",
-                canvas: document.getElementById("game2"),
-                framerate: 60
-            });
-            setInterval(() => {
-                document.getElementById("counter").innerText =
-                    `Sprite count: ${Object.keys(BCGE.sprites()).length}`
-            })
-        </script>
+        },1)">Do a spiral using gravityDegree and gravityAcceleration</button></p>
+    <script>
+        new BCGE.Stage({
+            height: 500,
+            width: 500,
+            color: "rgb(0,255,0)",
+            canvas: document.getElementById("game2"),
+            framerate: 60
+        });
+        setInterval(() => {
+            document.getElementById("counter").innerText =
+                `Sprite count: ${Object.keys(BCGE.sprites()).length}`
+        })
+    </script>
 </body>
 
 </html>
