@@ -55,10 +55,11 @@
                 }
             }, 1000 / frameRate)
         }
-        _myLibraryObject.Sprite = function ([x = 0, y = 0, degree = 0] = [0, 0, 0], image = "") {
+        _myLibraryObject.Sprite = function ([x = 0, y = 0, degree = 0] = [0, 0, 0], nickname, image = "") {
             this.x = x
             this.y = y
             this.degree = degree
+            this.nickname = nickname
             Object.defineProperty(this, "id", {
                 writable: false,
                 enumerable: true,
@@ -130,6 +131,14 @@
                         this.x += this.physics.velocity / 1000 * Math.cos(rad(this.physics.degree));
                         this.y += this.physics.velocity / 1000 * Math.sin(rad(this.physics.degree));
                     }, 1000 / frameRate)
+                }
+            });
+            Object.defineProperty(this, "toggleSolid", {
+                writable: false,
+                enumerable: true,
+                configurable: true,
+                value: function toggleSolid() {
+                    //W.I.P.!
                 }
             });
             sprites[this.id] = this

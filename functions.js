@@ -31,9 +31,11 @@ function clone(obj) {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
+
 function rad(degrees) {
     return degrees * (Math.PI / 180);
 }
+
 function drawRotatedImage(context, image, x, y, angle) {
 
     // save the current co-ordinate system 
@@ -53,4 +55,26 @@ function drawRotatedImage(context, image, x, y, angle) {
 
     // and restore the co-ords to how they were when we began
     context.restore();
+}
+
+function getNonTransparentPixels(image) {
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
+    context.drawImage(image, 0, 0);
+    try {
+        var pixels = context.getImageData(0, 0, image.width, image.height);
+        var nonTransparentPixels = [];
+        for (var i = 0; i < pixels.data.length / 4; i++) {
+            if (pixels.data[i * 4 + 3] !== 0) {
+                var pixel = {
+                    x: i - Math.trunc(i / image.width) * image.width,
+                    y: Math.trunc(i / image.width)
+                }
+                nonTransparentPixels.push(pixel)
+            }
+        }
+        return nonTransparentPixels
+    } catch (e) {
+        throw e;
+    }
 }
