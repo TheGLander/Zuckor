@@ -39,15 +39,17 @@
                 }
                 for (var i in sprites) {
                     if (!(Object.keys(spriteImg).includes(sprites[i].image))) {
-                        spriteImg[sprites[i].image] = new Image()
-                        spriteImg[sprites[i].image].src = sprites[i].image;
-                        spriteImg[sprites[i].image]["data-i"] = i
-                        spriteImg[sprites[i].image]["data-image"] = sprites[i].image
-                        spriteImg[sprites[i].image].onload = function (ev) {
-                            drawRotatedImage(context, spriteImg[ev.currentTarget["data-image"]], sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y, sprites[ev.currentTarget["data-i"]].y)
+                        spriteImg[sprites[i].image] = {}
+                        spriteImg[sprites[i].image].image = new Image()
+                        spriteImg[sprites[i].image].image.src = sprites[i].image;
+                        spriteImg[sprites[i].image].image["data-i"] = i
+                        spriteImg[sprites[i].image].image["data-image"] = sprites[i].image
+                        spriteImg[sprites[i].image].image.onload = function (ev) {
+                            drawRotatedImage(context, spriteImg[ev.currentTarget["data-image"]].image, sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y, sprites[ev.currentTarget["data-i"]].y)
+                            spriteImg[ev.currentTarget["data-image"]].pixels = getNonTransparentPixels(ev.currentTarget)
                         }
                     } else {
-                        drawRotatedImage(context, spriteImg[sprites[i].image], sprites[i].x, sprites[i].y, sprites[i].degree)
+                        drawRotatedImage(context, spriteImg[sprites[i].image].image, sprites[i].x, sprites[i].y, sprites[i].degree)
                     }
 
                 }
