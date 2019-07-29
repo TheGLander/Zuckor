@@ -91,7 +91,7 @@
                 writable: false,
                 enumerable: true,
                 configurable: true,
-                value: function ({
+                value: function togglePhysics({
                     velocity = 0,
                     acceleration = 0,
                     velocityLoss = 0,
@@ -101,15 +101,15 @@
                     gravityAcceleration = 0,
                     gravityDegree = 90
                 } = {
-                        velocity: 0,
-                        acceleration: 0,
-                        velocityLoss: 0,
-                        accelerationLoss: 0,
-                        degree: 0,
-                        gravityVelocity: 0,
-                        gravityAcceleration: 0,
-                        gravityDegree: 90
-                    }) {
+                    velocity: 0,
+                    acceleration: 0,
+                    velocityLoss: 0,
+                    accelerationLoss: 0,
+                    degree: 0,
+                    gravityVelocity: 0,
+                    gravityAcceleration: 0,
+                    gravityDegree: 90
+                }) {
                     this.physics.velocity = velocity // Starting velocity
                     this.physics.acceleration = acceleration // Starting acceleration
                     this.physics.velocityLoss = velocityLoss // Velocity Loss
