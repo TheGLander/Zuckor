@@ -55,7 +55,7 @@
                 }
             }, 1000 / frameRate)
         }
-        _myLibraryObject.Sprite = function ([x = 0, y = 0, degree = 0] = [0, 0, 0], nickname, image = "") {
+        _myLibraryObject.Sprite = function ([x = 0, y = 0, degree = 0] = [0, 0, 0], image = "", nickname) {
             this.x = x
             this.y = y
             this.degree = degree
@@ -78,6 +78,7 @@
             });
             this.image = image
             this.physics = {}
+            //Delete
             Object.defineProperty(this, "delete", {
                 writable: false,
                 enumerable: true,
@@ -85,6 +86,27 @@
                 value: function () {
                     clearInterval(this.physics.calcId);
                     delete sprites[this.id]
+                }
+            });
+            //Collisions
+            Object.defineProperty(this, "getCollisions", {
+                writable: false,
+                enumerable: true,
+                configurable: true,
+                value: function getCollisions() {
+                    var collisions = []
+                    for (var i in sprites) {
+                        if (sprites[i].id !== this.id) {
+                            for (var x in spriteImg[sprites[i].image].pixels) {
+                                for (var z in spriteImg[this.image].pixels) {
+                                    if (spriteImg[this.image].pixels[z].x + this.x == spriteImg[sprites[i].image].pixels[x].x + sprites[i].x && spriteImg[this.image].pixels[z].y + this.y == spriteImg[sprites[i].image].pixels[x].y + sprites[i].y && !collisions.includes(sprites[i])) {
+                                        collisions.push(sprites[i])
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return collisions
                 }
             });
             //Physics
