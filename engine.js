@@ -122,7 +122,8 @@
                     degree = 0,
                     gravityVelocity = 0,
                     gravityAcceleration = 0,
-                    gravityDegree = 90
+                    gravityDegree = 90,
+                    solid = false
                 } = {
                     velocity: 0,
                     acceleration: 0,
@@ -131,7 +132,8 @@
                     degree: 0,
                     gravityVelocity: 0,
                     gravityAcceleration: 0,
-                    gravityDegree: 90
+                    gravityDegree: 90,
+                    solid: false
                 }) {
                     this.physics.velocity = velocity // Starting velocity
                     this.physics.acceleration = acceleration // Starting acceleration
@@ -141,6 +143,7 @@
                     this.physics.gravityAcceleration = gravityAcceleration // Gravity acceleration
                     this.physics.gravityVelocity = gravityVelocity // Gravity velocity
                     this.physics.gravityDegree = gravityDegree // Degree to move to
+                    this.physics.solid = solid //If the object is solid
                     this.physics.calcId = setInterval(() => {
                         //Gravity movement calculation(No loss)
                         this.physics.gravityVelocity += this.physics.gravityAcceleration / 1000
@@ -153,14 +156,6 @@
                         this.x += this.physics.velocity / 1000 * Math.cos(rad(this.physics.degree));
                         this.y += this.physics.velocity / 1000 * Math.sin(rad(this.physics.degree));
                     }, 1000 / frameRate)
-                }
-            });
-            Object.defineProperty(this, "toggleSolid", {
-                writable: false,
-                enumerable: true,
-                configurable: true,
-                value: function toggleSolid() {
-                    //W.I.P.!
                 }
             });
             sprites[this.id] = this
