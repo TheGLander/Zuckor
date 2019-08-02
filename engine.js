@@ -1,4 +1,4 @@
-(function (window, $) {
+(function (window) {
     'use strict';
 
 
@@ -217,4 +217,4 @@
     if (typeof (window.myWindowGlobalLibraryName) === 'undefined') {
         window.BCGE = myLibrary();
     }
-})(window, $);
+})(window);
