@@ -38,6 +38,8 @@ function rad(degrees) {
 
 function drawRotatedImage(context, image, x, y, angle) {
 
+    x += image.width / 2
+    y += image.height / 2
     // save the current co-ordinate system 
     // before we screw with it
     context.save();
