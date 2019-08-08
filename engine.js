@@ -37,29 +37,35 @@
                     context.fillStyle = this.color
                     context.fillRect(0, 0, canvas.width, canvas.height);
                 }
-                for (var i in sprites) {
-                    if (!(Object.keys(spriteImg).includes(sprites[i].image))) {
-                        spriteImg[sprites[i].image] = {}
-                        spriteImg[sprites[i].image].image = new Image()
-                        spriteImg[sprites[i].image].image.src = sprites[i].image;
-                        spriteImg[sprites[i].image].image["data-i"] = i
-                        spriteImg[sprites[i].image].image["data-image"] = sprites[i].image
-                        spriteImg[sprites[i].image].image.onload = function (ev) {
-                            drawRotatedImage(context, spriteImg[ev.currentTarget["data-image"]].image, sprites[ev.currentTarget["data-i"]].x, sprites[ev.currentTarget["data-i"]].y, sprites[ev.currentTarget["data-i"]].y)
+                var orderedSprites = Object.values(sprites).sort(function (a, b) {
+                    var x = a["layer"];
+                    var y = b["layer"];
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                });
+                for (var i in orderedSprites) {
+                    if (!(Object.keys(spriteImg).includes(orderedSprites[i].image.imageName))) {
+                        spriteImg[orderedSprites[i].image.imageName] = {}
+                        spriteImg[orderedSprites[i].image.imageName].image = new Image()
+                        spriteImg[orderedSprites[i].image.imageName].image.src = orderedSprites[i].image.imageName;
+                        spriteImg[orderedSprites[i].image.imageName].image["data-i"] = i
+                        spriteImg[orderedSprites[i].image.imageName].image["data-image"] = orderedSprites[i].image.imageName
+                        spriteImg[orderedSprites[i].image.imageName].image.onload = function (ev) {
+                            drawRotatedImage(context, spriteImg[ev.currentTarget["data-image"]].image, orderedSprites[ev.currentTarget["data-i"]].x, orderedSprites[ev.currentTarget["data-i"]].y, orderedSprites[ev.currentTarget["data-i"]].degree, orderedSprites[ev.currentTarget["data-i"]].image.height, orderedSprites[ev.currentTarget["data-i"]].image.width)
                             spriteImg[ev.currentTarget["data-image"]].pixels = getNonTransparentPixels(ev.currentTarget)
                         }
                     } else {
-                        drawRotatedImage(context, spriteImg[sprites[i].image].image, sprites[i].x, sprites[i].y, sprites[i].degree)
+                        drawRotatedImage(context, spriteImg[orderedSprites[i].image.imageName].image, orderedSprites[i].x, orderedSprites[i].y, orderedSprites[i].degree, orderedSprites[i].image.height, orderedSprites[i].image.width)
                     }
 
                 }
             }, 1000 / frameRate)
         }
-        _myLibraryObject.Sprite = function ([x = 0, y = 0, degree = 0] = [0, 0, 0], image = "", nickname) {
-            this.x = x
-            this.y = y
-            this.degree = degree
-            this.nickname = nickname
+        _myLibraryObject.Sprite = function ([x, y, layer, degree] = [0, 0, 0], [image, width, height] = [], nickname) {
+            this.x = x || 0
+            this.y = y || 0
+            this.degree = degree || 0
+            this.nickname = nickname || ""
+            this.layer = layer || 0
             Object.defineProperty(this, "id", {
                 writable: false,
                 enumerable: true,
@@ -76,7 +82,10 @@
                     return Object.keys(sprites).length
                 })()
             });
-            this.image = image
+            this.image = {}
+            this.image.imageName = image || ""
+            this.image.height = height || null
+            this.image.width = width || null
             this.physics = {}
             //Delete
             Object.defineProperty(this, "delete", {
@@ -94,7 +103,7 @@
                 enumerable: true,
                 configurable: true,
                 value: function collisionWith(sprite) {
-                    return (Math.abs((this.x + spriteImg[this.image].image.width / 2) - (sprite.x + spriteImg[sprite.image].image.width / 2)) <= spriteImg[this.image].image.width / 2 + spriteImg[sprite.image].image.width / 2 && Math.abs((this.y + spriteImg[this.image].image.height / 2) - (sprite.y + spriteImg[sprite.image].image.height / 2)) <= spriteImg[this.image].image.height / 2 + spriteImg[sprite.image].image.height / 2)
+                    return (Math.abs((this.x + sprite.image.width / 2) - (sprite.x + sprite.image.width / 2)) <= sprite.image.width / 2 + sprite.image.width / 2 && Math.abs((this.y + sprite.image.height / 2) - (sprite.y + sprite.image.height / 2)) <= sprite.image.height / 2 + sprite.image.height / 2)
                 }
             });
             Object.defineProperty(this, "collisionWithSolid", {
