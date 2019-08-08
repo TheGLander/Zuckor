@@ -89,28 +89,6 @@
                 }
             });
             //Collisions
-            Object.defineProperty(this, "getCollisions", {
-                writable: false,
-                enumerable: true,
-                configurable: true,
-                value: function getCollisions() {
-                    console.warn("Sprite.getCollisions() is deprecated and may be removed in the next version. Use Sprite.collisionWith() instead.")
-                    var collisions = []
-                    for (var i in sprites) {
-                        if (sprites[i].id !== this.id) {
-                            for (var x in spriteImg[sprites[i].image].pixels) {
-                                for (var z in spriteImg[this.image].pixels) {
-                                    if (spriteImg[this.image].pixels[z].x + this.x == spriteImg[sprites[i].image].pixels[x].x + sprites[i].x && spriteImg[this.image].pixels[z].y + this.y == spriteImg[sprites[i].image].pixels[x].y + sprites[i].y && !collisions.includes(sprites[i])) {
-                                        collisions.push(sprites[i])
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    return collisions
-                }
-            });
-            // 
             Object.defineProperty(this, "collisionWith", {
                 writable: false,
                 enumerable: true,
