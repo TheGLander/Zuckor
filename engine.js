@@ -116,17 +116,7 @@
                 enumerable: true,
                 configurable: true,
                 value: function collisionWith(sprite) {
-                    if (Math.abs((this.x + spriteImg[this.image].image.width / 2) - (sprite.x + spriteImg[sprite.image].image.width / 2)) <= spriteImg[this.image].image.width && Math.abs((this.y + spriteImg[this.image].image.height / 2) - (sprite.y + spriteImg[sprite.image].image.height / 2)) <= spriteImg[this.image].image.height) {
-                        for (var x in spriteImg[sprite.image].pixels) {
-                            for (var z in spriteImg[this.image].pixels) {
-                                if (spriteImg[this.image].pixels[z].x + this.x == spriteImg[sprite.image].pixels[x].x + sprite.x && spriteImg[this.image].pixels[z].y + this.y == spriteImg[sprite.image].pixels[x].y + sprite.y) {
-                                    return true
-                                }
-                            }
-                        }
-                    }
-
-                    return false
+                    return (Math.abs((this.x + spriteImg[this.image].image.width / 2) - (sprite.x + spriteImg[sprite.image].image.width / 2)) <= spriteImg[this.image].image.width / 2 + spriteImg[sprite.image].image.width / 2 && Math.abs((this.y + spriteImg[this.image].image.height / 2) - (sprite.y + spriteImg[sprite.image].image.height / 2)) <= spriteImg[this.image].image.height / 2 + spriteImg[sprite.image].image.height / 2)
                 }
             });
             Object.defineProperty(this, "collisionWithSolid", {
