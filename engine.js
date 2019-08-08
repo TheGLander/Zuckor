@@ -41,7 +41,7 @@
                     var x = a["layer"];
                     var y = b["layer"];
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                });
+                }).reverse();
                 for (var i in orderedSprites) {
                     if (!(Object.keys(spriteImg).includes(orderedSprites[i].image.imageName))) {
                         spriteImg[orderedSprites[i].image.imageName] = {}
