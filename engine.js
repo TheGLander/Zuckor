@@ -185,14 +185,30 @@
                     this.physics.calcId = setInterval(() => {
                         //Gravity movement calculation(No loss)
                         this.physics.gravityVelocity += this.physics.gravityAcceleration / 1000
-                        this.x += this.physics.gravityVelocity / 1000 * Math.cos(rad(this.physics.gravityDegree));
-                        this.y += this.physics.gravityVelocity / 1000 * Math.sin(rad(this.physics.gravityDegree));
+                        if (!this.collisionWithSolid()) {
+                            this.x += this.physics.gravityVelocity / 1000 * Math.cos(rad(this.physics.gravityDegree));
+                        } else {
+                            this.physics.gravityVelocity = 0
+                        }
+                        if (!this.collisionWithSolid()) {
+                            this.y += this.physics.gravityVelocity / 1000 * Math.sin(rad(this.physics.gravityDegree));
+                        } else {
+                            this.physics.gravityVelocity = 0
+                        }
                         //Normal movement calculation(With loss)
                         this.physics.velocity += this.physics.acceleration / 1000
                         this.physics.velocity -= (this.physics.velocity - this.physics.velocityLoss / 1000 < 0 ? this.physics.velocity : this.physics.velocityLoss / 1000)
                         this.physics.acceleration -= (this.physics.acceleration - this.physics.accelerationLoss / 1000 < 0 ? this.physics.acceleration : this.physics.accelerationLoss / 1000)
-                        this.x += this.physics.velocity / 1000 * Math.cos(rad(this.physics.degree));
-                        this.y += this.physics.velocity / 1000 * Math.sin(rad(this.physics.degree));
+                        if (!this.collisionWithSolid()) {
+                            this.x += this.physics.velocity / 1000 * Math.cos(rad(this.physics.degree));
+                        } else {
+                            this.physics.velocity = 0
+                        }
+                        if (!this.collisionWithSolid()) {
+                            this.y += this.physics.velocity / 1000 * Math.sin(rad(this.physics.degree));
+                        } else {
+                            this.physics.velocity = 0
+                        }
                     }, 1000 / frameRate)
                 }
             });
