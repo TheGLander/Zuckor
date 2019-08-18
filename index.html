@@ -15,7 +15,7 @@
     <canvas id="game2"></canvas>
     <p id="counter">Sprite count: 0</p>
     <p><button onclick="
-        var dummy = new BCGE.Sprite([0, 0, 0], ['example-images/dummy.png']);
+        var dummy = new BCGE.Sprite([0, 0], 'example-images/dummy.png');
         var z = 0
         var RID = setInterval(()=>{
             if(spin){
@@ -30,7 +30,7 @@
             }
         },1)">Slide diagonally</button></p>
     <p><button onclick="
-        var dummy = new BCGE.Sprite([0, 0, 0], ['example-images/dummy.png']);
+        var dummy = new BCGE.Sprite([0, 0], 'example-images/dummy.png');
         dummy.togglePhysics({velocity:7500,degree:80})
         var RID = setInterval(()=>{
             if(spin){
@@ -48,7 +48,7 @@
             }
         },1)">Bounce up and down</button></p>
     <p><button onclick="
-        var dummy = new BCGE.Sprite([150, 150, 0], ['example-images/dummy.png']);
+        var dummy = new BCGE.Sprite([150, 150], 'example-images/dummy.png');
         var z = 0
         dummy.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
         var RID = setInterval(()=>{
