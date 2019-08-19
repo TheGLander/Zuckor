@@ -8,7 +8,6 @@
     <title>BCGE Tech demo!</title>
     <script src="functions.js"></script>
     <script src="engine.js"></script>
-    <script src="engine.js"></script>
 </head>
 
 <body>
@@ -58,7 +57,7 @@
             }
             dummy.physics.gravityDegree = z % 365 * 6
             z++
-            if(z >= 300){
+            if(dummy.x + dummy.y <= 0){
                 dummy.delete()
                 clearInterval(RID)
             }
