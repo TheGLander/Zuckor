@@ -8,6 +8,7 @@
     <title>BCGE Tech demo!</title>
     <script src="functions.js"></script>
     <script src="engine.js"></script>
+    <script src="engine.js"></script>
 </head>
 
 <body>
@@ -23,15 +24,15 @@
             }
             dummy.x = z
             dummy.y = z
-            z++
-            if(z == 500){
+            z+= 3
+            if(z >= 500){
                 dummy.delete()
                 clearInterval(RID)
             }
-        },1)">Slide diagonally</button></p>
+        },16)">Slide diagonally</button></p>
     <p><button onclick="
         var dummy = new BCGE.Sprite([0, 0], 'example-images/dummy.png');
-        dummy.togglePhysics({velocity:7500,degree:80})
+        dummy.togglePhysics({velocity:200,degree:80})
         var RID = setInterval(()=>{
             if(spin){
                 dummy.degree += 2
@@ -46,25 +47,25 @@
                 dummy.delete()
                 clearInterval(RID)
             }
-        },1)">Bounce up and down</button></p>
+        },16)">Bounce up and down</button></p>
     <p><button onclick="
         var dummy = new BCGE.Sprite([150, 150], 'example-images/dummy.png');
         var z = 0
-        dummy.togglePhysics({gravityAcceleration:100000,gravityDegree:0})
+        dummy.togglePhysics({gravityAcceleration:450,gravityDegree:0})
         var RID = setInterval(()=>{
             if(spin){
-                dummy.degree += 2
+                dummy.degree += 6
             }
-            dummy.physics.gravityDegree = z % 365 * 2
+            dummy.physics.gravityDegree = z % 365 * 6
             z++
-            if(z == 1250){
+            if(z >= 300){
                 dummy.delete()
                 clearInterval(RID)
             }
-        },1)">Do a spiral</button></p>
+        },16)">Do a spiral</button></p>
     <p><input id="spin" type="checkbox"><label for="spin">Spin!</label></p>
     <script>
-        new BCGE.Stage({
+        var stage = new BCGE.Stage({
             height: 500,
             width: 500,
             color: "rgb(0,255,0)",
@@ -73,7 +74,7 @@
         });
         setInterval(() => {
             document.getElementById("counter").innerText =
-                `Sprite count: ${Object.keys(BCGE.sprites()).length}`
+                `Sprite count: ${Object.keys(stage.sprites).length}`
         })
         var spin = false
         var checkmark = document.querySelector('input[id="spin"]');
