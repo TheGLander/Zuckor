@@ -7,7 +7,6 @@
         var _myLibraryObject = {};
         var sprites = {}
         var spriteImg = {};
-        var frameRate = 60;
         var physicsCalcRate = 60;
         class Stage {
             constructor({
@@ -15,17 +14,14 @@
                 width: width = 500,
                 color: color = undefined,
                 canvas: canvas = document.getElementById("game"),
-                framerate: framerate = 60,
                 calcRate: calcRate = 60
             } = {
                 height: 500,
                 width: 500,
                 color: undefined,
                 canvas: document.getElementById("game"),
-                framerate: 60,
                 calcRate: 60
             }) {
-                frameRate = framerate
                 canvas.height = height
                 canvas.width = width
                 physicsCalcRate = calcRate
