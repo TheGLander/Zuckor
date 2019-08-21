@@ -47,6 +47,7 @@
                         var y = b["layer"];
                         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                     }).reverse();
+                    //a
                     for (var i in orderedSprites) {
                         if (!(Object.keys(spriteImg).includes(orderedSprites[i].image))) {
                             spriteImg[orderedSprites[i].image] = {}
