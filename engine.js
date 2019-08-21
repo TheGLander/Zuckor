@@ -75,10 +75,10 @@
         _myLibraryObject.Stage = Stage
 
         class Sprite {
-            constructor([x, y, layer, degree] = [0, 0, 0, 0], image, nickname) {
+            constructor([x, y, layer, degree] = [0, 0, 90, 0], image, nickname) {
                 this.x = x || 0
                 this.y = y || 0
-                this.degree = degree || 90
+                this.degree = degree === undefined?  90 : degree
                 this.nickname = nickname || ""
                 this.layer = layer || 0
                 this.image = image || ""
