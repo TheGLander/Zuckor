@@ -30,7 +30,7 @@
                 canvas.width = width
                 physicsCalcRate = calcRate
                 //Render process
-                setInterval(() => {
+                var renderer = () => {
                     this.color = color
                     this.height = height
                     this.width = width
@@ -56,14 +56,16 @@
                             spriteImg[orderedSprites[i].image].image["data-image"] = orderedSprites[i].image
                             spriteImg[orderedSprites[i].image].image.onload = function (ev) {
                                 drawRotatedImage(context, spriteImg[ev.currentTarget["data-image"]].image, orderedSprites[ev.currentTarget["data-i"]].x, orderedSprites[ev.currentTarget["data-i"]].y, orderedSprites[ev.currentTarget["data-i"]].y)
-                                spriteImg[ev.currentTarget["data-image"]].pixels = getNonTransparentPixels(ev.currentTarget)
+                                //spriteImg[ev.currentTarget["data-image"]].pixels = getNonTransparentPixels(ev.currentTarget)
                             }
                         } else {
                             drawRotatedImage(context, spriteImg[orderedSprites[i].image].image, orderedSprites[i].x, orderedSprites[i].y, orderedSprites[i].degree)
                         }
 
                     }
-                }, 1000 / frameRate)
+                    requestAnimationFrame(renderer)
+                }
+                renderer()
             }
             get sprites() {
                 return clone(sprites)
@@ -126,16 +128,16 @@
                 gravityDegree = 90,
                 solid = false
             } = {
-                    velocity: 0,
-                    acceleration: 0,
-                    velocityLoss: 0,
-                    accelerationLoss: 0,
-                    degree: 0,
-                    gravityVelocity: 0,
-                    gravityAcceleration: 0,
-                    gravityDegree: 90,
-                    solid: false
-                }) {
+                velocity: 0,
+                acceleration: 0,
+                velocityLoss: 0,
+                accelerationLoss: 0,
+                degree: 0,
+                gravityVelocity: 0,
+                gravityAcceleration: 0,
+                gravityDegree: 90,
+                solid: false
+            }) {
                 this.physics.velocity = velocity // Starting velocity
                 this.physics.acceleration = acceleration // Starting acceleration
                 this.physics.velocityLoss = velocityLoss // Velocity Loss
@@ -180,7 +182,7 @@
     }
     if (typeof (window.BCGE) === 'undefined') {
         window.BCGE = myLibrary();
-    }else{
+    } else {
         throw new Error("BCGE already defined! Maybe imported BCGE twice?")
     }
 })(window);
