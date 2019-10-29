@@ -1,7 +1,7 @@
 import minify from 'rollup-plugin-babel-minify';
 import inject from 'rollup-plugin-inject';
 import analyze from 'rollup-plugin-analyzer'
-import banner from 'rollup-plugin-banner'
+//import banner from 'rollup-plugin-banner'
 import path from 'path';
 minify
 export default {
@@ -17,9 +17,9 @@ export default {
         moduleSideEffects: ""
     },
     plugins: [
-        /*minify({
+        minify({
             comments: false
-        }),*/
+        }),
         inject({
             exclude: 'node_modules/*.js',
             modules: {
