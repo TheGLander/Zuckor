@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zuckor Tech demo!</title>
+    <!--<script src="functions.js" type="module/javascript"></script>
+    <script src="engine.js" type="module/javascript"></script>-->
+    <script src="../dist/zuckor-min.js"></script>
+</head>
+
+<body>
+    <h1>Zuckor Tech demo!</h1>
+    <canvas id="game2"></canvas>
+    <p id="counter">Sprite count: 0</p>
+    <p id="fps">FPS: 0</p>
+    <p><button onclick="
+        let dummy = new Zuckor.Sprite.Img({x:0,y:0,image:'images/dummy.png'});
+        let z = 0
+        stage.assign(dummy)
+        let RID = setInterval(()=>{
+            if(spin){
+                dummy.degree += 2
+            }
+            dummy.x = z
+            dummy.y = z
+            z+= 3
+            if(z >= 500){
+                dummy.delete()
+                clearInterval(RID)
+            }
+        },16)">Slide diagonally</button></p>
+    <p><button onclick="
+        let dummy = new Zuckor.Sprite.Img({x:0,y:0,image:'images/dummy.png'});
+        dummy.togglePhysics({velocity:1000,degree:80})
+        stage.assign(dummy)
+        let RID = setInterval(()=>{
+            if(spin){
+                dummy.degree += 2
+            }
+            if(dummy.y >= 480){
+                dummy.physics.degree = 280
+            }
+            if(dummy.y <= 0){
+            dummy.physics.degree = 80
+            }
+            if(dummy.x >= 500){
+                dummy.delete()
+                clearInterval(RID)
+            }
+        },16)">Bounce up and down</button></p>
+    <p><button onclick="
+        let dummy = new Zuckor.Sprite.Img({x:150,y:150,image:'images/dummy.png',autoSize:false});
+        stage.assign(dummy)
+        let z = 0
+        dummy.togglePhysics({gravityAcceleration:450,gravityDegree:0})
+        let RID = setInterval(()=>{
+            let mult = document.getElementById('size-slider').value;
+            if(spin){
+                dummy.degree += 6
+            }
+            dummy.physics.gravityDegree = z % 365 * 6
+            dummy.height = (z * (mult % 64)) + 1
+            dummy.width = (z * (mult % 64)) + 1
+            z++
+            if(dummy.x <= -32){ dummy.delete();
+                clearInterval(RID) 
+            } 
+        },16)">Do a spiral</button></p>
+    <p><input id="spin" type="checkbox"><label for="spin">Spin!</label></p>
+    <p><input id="change-size" type="checkbox"><label for="change-size">Change size!</label></p>
+    <p style="position:relative"> Size change: <input id="size-slider" type="range"
+            style="top: 5%;margin: 0;position: absolute" min="0" max="2" step="0.01"></p>
+    <script>
+        //import * as Zuckor from "./engine.js"
+        for (let i = 1; i < 65; i++) {
+            Zuckor.loadImg("images/dummy.png", i, i)
+        }
+        //window.Zuckor = Zuckor
+        let stage = new Zuckor.Stage({
+            height: 500,
+            width: 500,
+            color: "rgb(0,255,0)",
+            canvas: document.getElementById("game2"),
+            framerate: 60
+        });
+        window.stage = stage
+        setInterval(() => {
+            document.getElementById("counter").innerText =
+                `Sprite count: ${Object.keys(stage.sprites).length}`
+        })
+        window.spin = false
+        let toSpin = document.getElementById('spin');
+        let changeSize = document.getElementById('change-size');
+        toSpin.checked = false
+        changeSize.checked = false
+        toSpin.addEventListener('click', function (
+            e) {
+            window.spin = !window.spin
+        });
+        changeSize.addEventListener('click', function (
+            e) {
+            window.changeSize = !window.changeSize
+        });
+        let filterStrength = 20;
+        let frameTime = 0,
+            lastLoop = new Date,
+            thisLoop;
+
+        function gameLoop() {
+            // ...
+            let thisFrameTime = (thisLoop = new Date) - lastLoop;
+            frameTime += (thisFrameTime - frameTime) / filterStrength;
+            lastLoop = thisLoop;
+            requestAnimationFrame(gameLoop)
+        }
+        gameLoop()
+        // Report the fps only every second, to only lightly affect measurements
+        let fpsOut = document.getElementById('fps');
+        setInterval(function () {
+            fpsOut.innerHTML = Math.round(1000 / frameTime) + " FPS";
+        }, 1000);
+        setTimeout(() => {
+            stage.assign(new Zuckor.Sprite.Img({
+                image: "images/potato.png",
+                width: 1000,
+                x: -250,
+                y: 400
+            }))
+        }, 10000)
+    </script>
+</body>
+<h3>
+    Photo credits:
+    <br>
+    <a href="http://www.pngall.com/potato-png/download/3531">The potato</a>
+    <br>
+    <a href="javascript:alert('By me!')">The cube</a>
+</h3>
+
+</html>

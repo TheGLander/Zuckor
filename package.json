@@ -1,0 +1,32 @@
+{
+  "name": "zuckor",
+  "version": "0.0.0",
+  "description": "A basic Canvas engine.",
+  "main": "zuckor-min.js",
+  "scripts": {
+    "build": "./node_modules/.bin/rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheGLander/BadCanvasGameEngine.git"
+  },
+  "keywords": [
+    "canvas",
+    "engine",
+    "zuckor"
+  ],
+  "author": "G lander",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheGLander/BadCanvasGameEngine/issues"
+  },
+  "homepage": "https://github.com/TheGLander/BadCanvasGameEngine#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "^1.20.3",
+    "rollup-plugin-analyzer": "^3.2.1",
+    "rollup-plugin-babel-minify": "^9.0.0",
+    "rollup-plugin-banner": "^0.2.1",
+    "rollup-plugin-inject": "^3.0.1"
+  }
+}
