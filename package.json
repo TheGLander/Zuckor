@@ -2,10 +2,12 @@
   "name": "zuckor",
   "version": "1.0.0",
   "description": "A basic Canvas engine.",
-  "main": "zuckor-min.js",
+  "main": "./dist/zuckor-min.js",
+  "module": "./src/index.ts",
   "scripts": {
-    "build": "./node_modules/.bin/rollup -c"
+    "build": "npx rollup -c && npx dts-bundle-generator -o ./dist/zuckor.d.ts ./src/index.ts --umd-module-name Zuckor"
   },
+  "types": "./dist/zuckor.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheGLander/BadCanvasGameEngine.git"
@@ -23,10 +25,13 @@
   "homepage": "https://github.com/TheGLander/BadCanvasGameEngine#readme",
   "dependencies": {},
   "devDependencies": {
-    "rollup": "^1.20.3",
+    "dts-bundle-generator": "^3.3.1",
+    "rollup": "^1.26.3",
     "rollup-plugin-analyzer": "^3.2.1",
     "rollup-plugin-babel-minify": "^9.0.0",
     "rollup-plugin-banner": "^0.2.1",
-    "rollup-plugin-inject": "^3.0.1"
+    "rollup-plugin-inject": "^3.0.1",
+    "rollup-plugin-typescript2": "^0.25.2",
+    "typescript": "^3.7.2"
   }
 }
