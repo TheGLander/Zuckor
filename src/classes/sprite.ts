@@ -101,11 +101,11 @@ export default class Sprite implements IRenderable {
     velocityLoss = 0,
     accelerationLoss = 0,
     degree = 0,
-    maxVelocity = undefined,
+    maxVelocity,
     gravityVelocity = 0,
     gravityAcceleration = 0,
     gravityDegree = 90,
-    gravityMaxVelocity = undefined,
+    gravityMaxVelocity,
     solid = false
   }: IPhysics = {}) {
     this.physics = {
