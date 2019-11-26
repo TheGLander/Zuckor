@@ -14,8 +14,8 @@ export default class Stage {
   constructor({
     height = 500,
     width = 500,
-    color = undefined,
-    canvas = undefined
+    color,
+    canvas
   } = {}) {
     canvas.height = height || 500;
     canvas.width = width;
