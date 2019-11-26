@@ -25,7 +25,7 @@ export default class Stage {
       }
       for (let x in Object.keys(stages)) {
         if (x != (stages[x] === undefined ? undefined : stages[x].id)) {
-          return parseInt(x);
+          return parseInt(x, 10);
         }
       }
       return Object.keys(stages).length;
@@ -83,13 +83,9 @@ export default class Stage {
         context.fillStyle = this.color;
         context.fillRect(0, 0, canvas.width, canvas.height);
       }
-      let orderedSprites = Object.values(this.sprites).sort(function(a, b) {
-        let x = a["layer"];
-        let y = b["layer"];
-        return x < y ? -1 : x > y ? 1 : 0;
-      });
-      for (let i in orderedSprites) {
-        let currentSprite = orderedSprites[i];
+
+      for (let i in this.sprites) {
+        let currentSprite = this.sprites[i];
         currentSprite.x = Math.trunc(currentSprite.x);
         currentSprite.y = Math.trunc(currentSprite.y);
         currentSprite.height = Math.trunc(currentSprite.height);
@@ -110,8 +106,14 @@ export default class Stage {
   //get sprites() {
   //    return clone(sprites)
   //}
-  assign(sprite) {
-    this.sprites[sprite.id] = sprite;
+  assign(sprite: IRenderable) {
+    this.sprites.push(sprite);
+    this.sprites = Object.values(this.sprites).sort(function(a, b) {
+      let x = a["layer"];
+      let y = b["layer"];
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+
     sprites[sprite.id].stage = this;
   }
   delete() {

@@ -9,4 +9,5 @@ export default interface IRenderable {
   onClick?: Function;
   onHover?: Function;
   hidden: boolean;
+  id: number;
 }

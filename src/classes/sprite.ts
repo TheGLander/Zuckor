@@ -56,7 +56,7 @@ export default class Sprite implements IRenderable {
       }
       for (let x in Object.keys(sprites)) {
         if (x != (sprites[x] === undefined ? undefined : sprites[x].id)) {
-          return parseInt(x);
+          return parseInt(x, 10);
         }
       }
       return Object.keys(sprites).length;
@@ -78,7 +78,7 @@ export default class Sprite implements IRenderable {
     return null;
   }
   collisionWith(sprite: Sprite) {
-    //TODO: Add rotated collision check
+    //TODO: Add rotated box collision
     return (
       Math.abs(this.x + this.width / 2 - (sprite.x + sprite.width / 2)) <=
         this.width / 2 + sprite.width / 2 &&
@@ -92,7 +92,7 @@ export default class Sprite implements IRenderable {
       cancelAnimationFrame(this.physics.calcHandle);
     }
     delete sprites[this.id];
-    if (this.stage) delete this.stage.sprites[this.id];
+    if (this.stage) delete this.stage.sprites[this.stage.sprites.indexOf(this)];
     this.deleted = true;
   }
   togglePhysics({
@@ -107,7 +107,7 @@ export default class Sprite implements IRenderable {
     gravityDegree = 90,
     gravityMaxVelocity = undefined,
     solid = false
-  } = {}) {
+  }: IPhysics = {}) {
     this.physics = {
       velocity, // Starting velocity
       acceleration, // Starting acceleration

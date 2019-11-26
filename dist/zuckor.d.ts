@@ -9,6 +9,7 @@ export interface IRenderable {
 	onClick?: Function;
 	onHover?: Function;
 	hidden: boolean;
+	id: number;
 }
 export declare class Stage {
 	canvas: HTMLCanvasElement;
@@ -25,7 +26,7 @@ export declare class Stage {
 		color?: any;
 		canvas?: any;
 	});
-	assign(sprite: any): void;
+	assign(sprite: IRenderable): void;
 	delete(): void;
 }
 export interface IPhysics {
@@ -84,19 +85,7 @@ export declare class Sprite implements IRenderable {
 	collisionWithSolid(): any;
 	collisionWith(sprite: Sprite): boolean;
 	delete(): void;
-	togglePhysics({ velocity, acceleration, velocityLoss, accelerationLoss, degree, maxVelocity, gravityVelocity, gravityAcceleration, gravityDegree, gravityMaxVelocity, solid }?: {
-		velocity?: number;
-		acceleration?: number;
-		velocityLoss?: number;
-		accelerationLoss?: number;
-		degree?: number;
-		maxVelocity?: any;
-		gravityVelocity?: number;
-		gravityAcceleration?: number;
-		gravityDegree?: number;
-		gravityMaxVelocity?: any;
-		solid?: boolean;
-	}): void;
+	togglePhysics({ velocity, acceleration, velocityLoss, accelerationLoss, degree, maxVelocity, gravityVelocity, gravityAcceleration, gravityDegree, gravityMaxVelocity, solid }?: IPhysics): void;
 	togglePlayer({ maxSpeed, acceleration }: {
 		maxSpeed: any;
 		acceleration: any;
