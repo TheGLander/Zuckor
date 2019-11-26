@@ -1,6 +1,6 @@
 {
   "name": "zuckor",
-  "version": "1.0.1",
+  "version": "0.1.0",
   "description": "A basic Canvas engine.",
   "main": "./dist/zuckor-min.js",
   "scripts": {
