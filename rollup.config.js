@@ -1,13 +1,13 @@
-import minify from 'rollup-plugin-babel-minify';
-import analyze from 'rollup-plugin-analyzer'
-import typescript from 'rollup-plugin-typescript2';
-//import banner from 'rollup-plugin-banner'
+import minify from "rollup-plugin-babel-minify";
+import analyze from "rollup-plugin-analyzer"
+import typescript from "rollup-plugin-typescript2";
+//import banner from "rollup-plugin-banner"
 export default {
-    input: ['./src/index.ts'],
+    input: ["./src/index.ts"],
     output: {
-        name: 'Zuckor',
+        name: "Zuckor",
         file: "./dist/zuckor-min.js",
-        format: 'umd',
+        format: "umd",
         sourcemap: true
 
     },
@@ -21,6 +21,6 @@ export default {
         analyze({
             summaryOnly: true
         }),
-        //banner('Zuckor <%= pkg.version %> - <%= pkg.author %>')
+        //banner("Zuckor <%= pkg.version %> - <%= pkg.author %>")
     ]
 };
