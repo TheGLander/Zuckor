@@ -4,12 +4,12 @@ import IRenderable from "../interfaces/renderable";
 const defaultHeight = 500;
 const defaultWidth = 500;
 export default class Stage {
-  public canvas: HTMLCanvasElement;
-  public sprites: Array<IRenderable>;
-  public color: string;
-  public height: number;
-  public width: number;
-  public context: CanvasRenderingContext2D;
+  canvas: HTMLCanvasElement;
+  sprites: Array<IRenderable>;
+  color: string;
+  height: number;
+  width: number;
+  context: CanvasRenderingContext2D;
   private id: number;
   private renderHandle: number;
   constructor({
@@ -107,7 +107,7 @@ export default class Stage {
   //get sprites() {
   //    return clone(sprites)
   //}
-  public assign(sprite: IRenderable) {
+  assign(sprite: IRenderable) {
     this.sprites.push(sprite);
     this.sprites = Object.values(this.sprites).sort((a, b) => {
       let x = a["layer"];
@@ -117,7 +117,7 @@ export default class Stage {
 
     sprites[sprite.id].stage = this;
   }
-  public delete() {
+  delete() {
     cancelAnimationFrame(this.renderHandle);
     delete stages[this.id];
   }
