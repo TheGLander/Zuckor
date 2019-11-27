@@ -13,12 +13,12 @@ export interface IRenderable {
 }
 export declare class Stage {
 	canvas: HTMLCanvasElement;
-	private id;
 	sprites: Array<IRenderable>;
 	color: string;
 	height: number;
 	width: number;
 	context: CanvasRenderingContext2D;
+	private id;
 	private renderHandle;
 	constructor({ height, width, color, canvas }?: {
 		height?: number;
@@ -56,21 +56,20 @@ export declare class Sprite implements IRenderable {
 	nickname: string;
 	width: number;
 	height: number;
-	points: any;
 	autoSize: boolean;
 	hidden: boolean;
 	physics: IPhysics;
 	player: IPlayer;
-	type: any;
 	id: number;
 	stage: Stage;
-	deleted: boolean;
 	onClick: Function;
 	onHover: Function;
 	renderer: Function;
 	static Img: any;
 	static Rect: any;
 	static Circle: any;
+	protected type: any;
+	protected deleted: boolean;
 	constructor({ x, y, degree, layer, nickname, width, height, autoSize, hidden }: {
 		x: any;
 		y: any;

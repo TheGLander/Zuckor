@@ -8,28 +8,29 @@ import IPlayer from "../interfaces/player";
 //import Circle from "../renders/circle";
 import IRenderable from "../interfaces/renderable";
 export default class Sprite implements IRenderable {
-  x = 0;
-  y = 0;
-  degree = 90;
-  layer = 0;
-  nickname: string;
-  width = 0;
-  height = 0;
-  points: any;
-  autoSize = true;
-  hidden = false;
+  public x = 0;
+  public y = 0;
+  public degree = 90;
+  public layer = 0;
+  public nickname: string;
+  public width = 0;
+  public height = 0;
+  //points: any;
+  public autoSize = true;
+  public hidden = false;
   physics: IPhysics = {};
   player: IPlayer;
-  type = null;
-  id: number;
-  stage: Stage;
-  deleted = false;
-  onClick: Function;
-  onHover: Function;
-  renderer: Function;
+  public id: number;
+  public stage: Stage;
+
+  public onClick: Function;
+  public onHover: Function;
+  public renderer: Function;
   static Img: any;
   static Rect: any;
   static Circle: any;
+  protected type = null;
+  protected deleted = false;
   constructor({
     x,
     y,
@@ -66,7 +67,7 @@ export default class Sprite implements IRenderable {
     this.stage = null;
     sprites[this.id] = this;
   }
-  collisionWithSolid() {
+  collisionWithSolid(): IRenderable {
     for (let i in sprites) {
       if (sprites[i].physics.solid && sprites[i].id !== this.id) {
         let sprite = sprites[i];
@@ -77,7 +78,7 @@ export default class Sprite implements IRenderable {
     }
     return null;
   }
-  collisionWith(sprite: Sprite) {
+  collisionWith(sprite: Sprite): boolean {
     //TODO: Add rotated box collision
     return (
       Math.abs(this.x + this.width / 2 - (sprite.x + sprite.width / 2)) <=
@@ -86,7 +87,7 @@ export default class Sprite implements IRenderable {
         this.height / 2 + sprite.height / 2
     );
   }
-  delete() {
+  delete(): void {
     if (this.deleted) return;
     if (this.physics.calcHandle !== undefined) {
       cancelAnimationFrame(this.physics.calcHandle);
@@ -107,7 +108,7 @@ export default class Sprite implements IRenderable {
     gravityDegree = 90,
     gravityMaxVelocity,
     solid = false
-  }: IPhysics = {}) {
+  }: IPhysics = {}): void {
     this.physics = {
       velocity, // Starting velocity
       acceleration, // Starting acceleration
@@ -171,7 +172,7 @@ export default class Sprite implements IRenderable {
     };
     this.physics.calcHandle = requestAnimationFrame(physicsCalc);
   }
-  togglePlayer({ maxSpeed, acceleration }) {
+  togglePlayer({ maxSpeed, acceleration }): void {
     this.player = {
       looking: false,
       acceleration,

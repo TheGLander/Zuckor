@@ -5,12 +5,12 @@ const defaultHeight = 500;
 const defaultWidth = 500;
 export default class Stage {
   public canvas: HTMLCanvasElement;
-  private id: number;
   public sprites: Array<IRenderable>;
   public color: string;
   public height: number;
   public width: number;
   public context: CanvasRenderingContext2D;
+  private id: number;
   private renderHandle: number;
   constructor({
     height = defaultHeight,
@@ -109,7 +109,7 @@ export default class Stage {
   //}
   public assign(sprite: IRenderable) {
     this.sprites.push(sprite);
-    this.sprites = Object.values(this.sprites).sort(function(a, b) {
+    this.sprites = Object.values(this.sprites).sort((a, b) => {
       let x = a["layer"];
       let y = b["layer"];
       return x < y ? -1 : x > y ? 1 : 0;
