@@ -2,6 +2,8 @@ import { stages, sprites } from "../vars";
 import Sprite from "./sprite";
 import IRenderable from "../interfaces/renderable";
 
+const defaultHeight = 500;
+const defaultWidth = 500;
 export default class Stage {
   canvas: HTMLCanvasElement;
   id: number;
@@ -12,12 +14,12 @@ export default class Stage {
   context: CanvasRenderingContext2D;
   renderHandle: number;
   constructor({
-    height = 500,
-    width = 500,
-    color,
-    canvas
+    height = defaultHeight,
+    width = defaultWidth,
+    color = "rgb()",
+    canvas = null
   } = {}) {
-    canvas.height = height || 500;
+    canvas.height = height;
     canvas.width = width;
     this.id = (function() {
       if (Object.keys(stages) == []) {

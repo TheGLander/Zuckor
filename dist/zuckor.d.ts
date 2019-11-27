@@ -23,7 +23,7 @@ export declare class Stage {
 	constructor({ height, width, color, canvas }?: {
 		height?: number;
 		width?: number;
-		color?: any;
+		color?: string;
 		canvas?: any;
 	});
 	assign(sprite: IRenderable): void;
