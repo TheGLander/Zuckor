@@ -1,27 +1,26 @@
 import { stages, sprites } from "../vars";
-import Sprite from "./sprite";
 import IRenderable from "../interfaces/renderable";
 
 const defaultHeight = 500;
 const defaultWidth = 500;
 export default class Stage {
-  canvas: HTMLCanvasElement;
-  id: number;
-  sprites: Array<IRenderable>;
-  color: string;
-  height: number;
-  width: number;
-  context: CanvasRenderingContext2D;
-  renderHandle: number;
+  public canvas: HTMLCanvasElement;
+  private id: number;
+  public sprites: Array<IRenderable>;
+  public color: string;
+  public height: number;
+  public width: number;
+  public context: CanvasRenderingContext2D;
+  private renderHandle: number;
   constructor({
     height = defaultHeight,
     width = defaultWidth,
-    color = "rgb()",
+    color = "rgb(0, 0 ,0)",
     canvas = null
   } = {}) {
     canvas.height = height;
     canvas.width = width;
-    this.id = (function() {
+    this.id = (function(): number {
       if (Object.keys(stages) == []) {
         return 0;
       }
@@ -108,7 +107,7 @@ export default class Stage {
   //get sprites() {
   //    return clone(sprites)
   //}
-  assign(sprite: IRenderable) {
+  public assign(sprite: IRenderable) {
     this.sprites.push(sprite);
     this.sprites = Object.values(this.sprites).sort(function(a, b) {
       let x = a["layer"];
@@ -118,7 +117,7 @@ export default class Stage {
 
     sprites[sprite.id].stage = this;
   }
-  delete() {
+  public delete() {
     cancelAnimationFrame(this.renderHandle);
     delete stages[this.id];
   }

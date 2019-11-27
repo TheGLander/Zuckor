@@ -13,13 +13,13 @@ export interface IRenderable {
 }
 export declare class Stage {
 	canvas: HTMLCanvasElement;
-	id: number;
+	private id;
 	sprites: Array<IRenderable>;
 	color: string;
 	height: number;
 	width: number;
 	context: CanvasRenderingContext2D;
-	renderHandle: number;
+	private renderHandle;
 	constructor({ height, width, color, canvas }?: {
 		height?: number;
 		width?: number;
