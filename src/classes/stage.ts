@@ -107,7 +107,7 @@ export default class Stage {
   //get sprites() {
   //    return clone(sprites)
   //}
-  assign(sprite: IRenderable) {
+  assign(sprite: IRenderable): void {
     this.sprites.push(sprite);
     this.sprites = Object.values(this.sprites).sort((a, b) => {
       let x = a["layer"];
