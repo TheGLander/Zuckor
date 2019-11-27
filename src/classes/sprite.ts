@@ -8,18 +8,18 @@ import IPlayer from "../interfaces/player";
 //import Circle from "../renders/circle";
 import IRenderable from "../interfaces/renderable";
 export default class Sprite implements IRenderable {
-  public x = 0;
-  public y = 0;
-  public degree = 90;
-  public layer = 0;
+  public x: number = 0;
+  public y: number = 0;
+  public degree: number = 90;
+  public layer: number = 0;
   public nickname: string;
-  public width = 0;
-  public height = 0;
+  public width: number = 0;
+  public height: number = 0;
   //points: any;
-  public autoSize = true;
-  public hidden = false;
+  public autoSize: boolean = true;
+  public hidden: boolean = false;
   physics: IPhysics = {};
-  player: IPlayer;
+  player: IPlayer = {};
   public id: number;
   public stage: Stage;
 
@@ -29,8 +29,8 @@ export default class Sprite implements IRenderable {
   static Img: any;
   static Rect: any;
   static Circle: any;
-  protected type = null;
-  protected deleted = false;
+  protected type: any = null;
+  protected deleted: boolean = false;
   constructor({
     x,
     y,
