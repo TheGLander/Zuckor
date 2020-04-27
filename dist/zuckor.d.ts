@@ -20,7 +20,7 @@ export declare class Stage {
 	context: CanvasRenderingContext2D;
 	private id;
 	private renderHandle;
-	constructor({ height, width, color, canvas }?: {
+	constructor({ height, width, color, canvas, }?: {
 		height?: number;
 		width?: number;
 		color?: string;
@@ -44,9 +44,9 @@ export interface IPhysics {
 	calcHandle?: number;
 }
 export interface IPlayer {
-	looking: boolean;
-	maxSpeed: number;
-	acceleration: number;
+	looking?: boolean;
+	maxSpeed?: number;
+	acceleration?: number;
 }
 export declare class Sprite implements IRenderable {
 	x: number;
@@ -70,7 +70,7 @@ export declare class Sprite implements IRenderable {
 	static Circle: any;
 	protected type: any;
 	protected deleted: boolean;
-	constructor({ x, y, degree, layer, nickname, width, height, autoSize, hidden }: {
+	constructor({ x, y, degree, layer, nickname, width, height, autoSize, hidden, }: {
 		x: any;
 		y: any;
 		degree: any;
@@ -81,10 +81,10 @@ export declare class Sprite implements IRenderable {
 		autoSize?: boolean;
 		hidden: any;
 	});
-	collisionWithSolid(): any;
+	collisionWithSolid(): IRenderable;
 	collisionWith(sprite: Sprite): boolean;
 	delete(): void;
-	togglePhysics({ velocity, acceleration, velocityLoss, accelerationLoss, degree, maxVelocity, gravityVelocity, gravityAcceleration, gravityDegree, gravityMaxVelocity, solid }?: IPhysics): void;
+	togglePhysics({ velocity, acceleration, velocityLoss, accelerationLoss, degree, maxVelocity, gravityVelocity, gravityAcceleration, gravityDegree, gravityMaxVelocity, solid, }?: IPhysics): void;
 	togglePlayer({ maxSpeed, acceleration }: {
 		maxSpeed: any;
 		acceleration: any;

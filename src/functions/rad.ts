@@ -5,5 +5,5 @@
  * @return the converted radians.
  */
 export default function rad(degrees: number) {
-  return degrees * (Math.PI / 180);
+	return degrees * (Math.PI / 180)
 }
