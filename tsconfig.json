@@ -1,7 +1,7 @@
 {
-  "compilerOptions": {
-    "sourceMap": true,
-    "module": "esnext",
-    "lib": ["dom", "ESNext"]
-  }
+	"compilerOptions": {
+		"sourceMap": true,
+		"module": "esnext",
+		"lib": ["dom", "ESNext"]
+	}
 }
