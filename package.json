@@ -4,7 +4,8 @@
 	"description": "A basic Canvas engine.",
 	"main": "./dist/zuckor-min.js",
 	"scripts": {
-		"build": "npx rollup -c && npx dts-bundle-generator -o ./dist/zuckor.d.ts ./src/index.ts --umd-module-name Zuckor"
+		"build": "npx rollup -c && npx dts-bundle-generator -o ./dist/zuckor.d.ts ./src/index.ts --umd-module-name Zuckor",
+		"test": "echo \"TBA\""
 	},
 	"types": "./dist/zuckor.d.ts",
 	"repository": {
