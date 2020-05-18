@@ -1,4 +1,4 @@
-[*.ts]
+[*.{j,t}s]
 tab_width = 2
 indent_size = 1
 indent_style = tab
