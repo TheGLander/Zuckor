@@ -4,26 +4,30 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+	push:
+		branches: [master]
+	pull_request:
+		branches: [master]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-      - name: Install Deps
-        run: npm ci
-      - name: Build
-        run: npm run prodBuild --if-present
-      - name: Run tests
-        run: npm test
-      - name: Semantic Release Action
-        uses: codfish/semantic-release-action@v1
+	build:
+		runs-on: ubuntu-latest
+		strategy:
+			matrix:
+				node-version: [12.x]
+		steps:
+			- uses: actions/checkout@v2
+			- name: Use Node.js ${{ matrix.node-version }}
+				uses: actions/setup-node@v1
+			- name: Install Deps
+				run: npm ci
+			- name: Build
+				run: npm run prodBuild --if-present
+			- name: Run tests
+				run: npm test
+			- name: Semantic Release Action
+				uses: codfish/semantic-release-action@v1
+				env:
+					GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+					NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
